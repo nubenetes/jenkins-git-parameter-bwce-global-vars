@@ -95,7 +95,9 @@ flowchart TD
 
 1. **Profile Externalization via `.substvar`**:
    Environment-specific configurations (`DEV.substvar`, `STAGING.substvar`, `PROD.substvar`) are cleanly decoupled from the application archive (`.ear`) and injected at runtime using `BW_PROFILE`.
-2. **Engine Tuning & 12-Factor Design**:
+2. **Engine Tuning & 12-Factor Design (No CPU Limits + Namespace Governance)**:
+   - **No CPU Limits on Pods**: CPU limits are intentionally omitted at the container level to eliminate Linux CFS Bandwidth Throttling on multi-threaded JVM/BWCE processes.
+   - **Namespace ResourceQuotas**: Aggregate cluster CPU/Memory consumption is governed at the OpenShift Project boundary ([`cluster-quotas/namespace-resource-quota.yaml`](cluster-quotas/namespace-resource-quota.yaml)).
    - `BW_ENGINE_THREADCOUNT`: Dynamically scaled per environment (16 in DEV, 32 in STAGING, 64 in PROD).
    - `BW_STEP_FLOWLIMIT`: Throttles memory footprint during high-throughput burst traffic.
    - `BW_CONTAINER_SHUTDOWN_TIMEOUT_SECONDS`: Ensures graceful in-flight process completion upon SIGTERM.

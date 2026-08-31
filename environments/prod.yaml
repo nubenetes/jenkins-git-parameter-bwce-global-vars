@@ -49,3 +49,10 @@ database:
 jms:
   emsUrl: "tcp://ems-prod-primary:7222,tcp://ems-prod-backup:7222"
   connectionPool: 32
+
+resourceQuota:
+  hard:
+    requests.cpu: "64"
+    requests.memory: "128Gi"
+    limits.memory: "256Gi"
+    pods: "50"

@@ -49,3 +49,10 @@ database:
 jms:
   emsUrl: "tcp://ems-staging.nubenetes-staging-bwce.svc.cluster.local:7222"
   connectionPool: 16
+
+resourceQuota:
+  hard:
+    requests.cpu: "32"
+    requests.memory: "64Gi"
+    limits.memory: "128Gi"
+    pods: "50"

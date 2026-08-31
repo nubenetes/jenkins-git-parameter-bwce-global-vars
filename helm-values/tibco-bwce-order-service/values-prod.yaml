@@ -55,7 +55,7 @@ resources:
     cpu: 1000m
     memory: 1024Mi
   limits:
-    cpu: 2000m
+    # CPU limit omitted to prevent Linux CFS throttling; governed at project level via ResourceQuota
     memory: 2048Mi
 
 service:

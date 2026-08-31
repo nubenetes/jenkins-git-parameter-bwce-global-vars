@@ -49,3 +49,10 @@ database:
 jms:
   emsUrl: "tcp://ems-dev.nubenetes-dev-bwce.svc.cluster.local:7222"
   connectionPool: 8
+
+resourceQuota:
+  hard:
+    requests.cpu: "16"
+    requests.memory: "32Gi"
+    limits.memory: "64Gi"
+    pods: "50"
