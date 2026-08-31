@@ -23,6 +23,12 @@ Centralized Single Source of Truth (SSOT) repository storing environment configu
 > - **AI Generation Attribution**: This architecture, Infrastructure-as-Code implementation, and documentation were generated using **Gemini 3.7 Flash** with **Antigravity**.
 > - **Origin & Real-World Heritage**: This blueprint is based on [nubenetes/jenkins-git-parameter](https://github.com/nubenetes/jenkins-git-parameter) and [nubenetes/jenkins-git-parameter-global-vars](https://github.com/nubenetes/jenkins-git-parameter-global-vars), drawing directly from the author's personal hands-on experience designing and operating enterprise integration platforms with these exact requirements (engineered just before agentic AI became widespread).
 
+> [!TIP]
+> ### 🚀 Companion Repository (CI/CD & GitOps Orchestration Platform)
+> This configuration SSOT is consumed directly by the orchestration platform:  
+> 🚀 **[nubenetes/jenkins-git-parameter-bwce](https://github.com/nubenetes/jenkins-git-parameter-bwce)**  
+> *(Contains Jenkins JCasC, Job DSL multi-remote pipelines, Datadog Java APM agent injection, ArgoCD 3.5, and Argo Rollouts Canary)*
+
 ---
 
 ## 🏛️ SSOT Configuration Hierarchy
