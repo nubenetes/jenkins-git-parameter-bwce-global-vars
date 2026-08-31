@@ -12,6 +12,10 @@ Centralized Single Source of Truth (SSOT) repository storing environment configu
 
 ## 🏛️ SSOT Configuration Hierarchy
 
+<details>
+<summary>🗺️ <b>Click to expand: SSOT Configuration Hierarchy & Multi-Cluster Mapping Diagram</b></summary>
+<br/>
+
 ```mermaid
 flowchart TD
     subgraph GlobalConfigs ["1. Global Configuration Repository"]
@@ -42,6 +46,8 @@ flowchart TD
     ArgoCD -->|Syncs STAGING.substvar| Staging
     ArgoCD -->|Syncs PROD.substvar| Prod
 ```
+
+</details>
 
 ---
 
