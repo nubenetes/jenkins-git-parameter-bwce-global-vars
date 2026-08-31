@@ -38,34 +38,37 @@ Centralized Single Source of Truth (SSOT) repository storing environment configu
 <br/>
 
 ```mermaid
-flowchart TD
-    subgraph GlobalConfigs ["1. Global Configuration Repository"]
-        Envs["environments/<br/>• dev.yaml<br/>• staging.yaml<br/>• prod.yaml"]
-        Clusters["clusters/<br/>• ocp-dev-cluster.yaml<br/>• ocp-staging-cluster.yaml<br/>• ocp-prod-cluster.yaml"]
-        Apps["apps/<br/>• tibco-bwce-order-service.yaml<br/>• tibco-bwce-customer-api.yaml"]
-        HelmVal["helm-values/<br/>• values-dev.yaml<br/>• values-staging.yaml<br/>• values-prod.yaml"]
+flowchart TB
+    subgraph ConfigSSOT ["1. Global Config SSOT"]
+        direction TB
+        Envs["<b>environments/</b><br/>─────────<br/>• dev.yaml<br/>• staging.yaml<br/>• prod.yaml"]
+        Clusters["<b>clusters/</b><br/>─────────<br/>• dev-cluster<br/>• stg-cluster<br/>• prod-cluster"]
+        Apps["<b>apps/</b><br/>─────────<br/>• order-service<br/>• customer-api"]
+        HelmVal["<b>helm-values/</b><br/>─────────<br/>• values-dev<br/>• values-stg<br/>• values-prod"]
     end
 
-    subgraph GitOpsControllers ["2. GitOps & Observability Consumers"]
-        Jenkins["🚀 Jenkins Controller<br/>(Git Parameter Dropdown)"]
-        ArgoCD["🐙 ArgoCD 3.5<br/>(Sync Waves Engine)"]
-        Datadog["🐶 Datadog Agent<br/>(Unified Service Tagging)"]
+    subgraph Consumers ["2. GitOps & Observability"]
+        direction TB
+        Jenkins["<b>Jenkins Master</b><br/>Git Parameter<br/>Dropdown"]
+        ArgoCD["<b>ArgoCD 3.5</b><br/>Multi-Cluster<br/>Sync Waves"]
+        Datadog["<b>Datadog Agent</b><br/>Unified Service<br/>Tagging"]
     end
 
-    subgraph TargetClusters ["3. Target OpenShift Clusters"]
-        Dev["☸️ OCP DEV (nubenetes-dev-bwce)"]
-        Staging["☸️ OCP STAGING (nubenetes-staging-bwce)"]
-        Prod["☸️ OCP PROD (nubenetes-prod-bwce)"]
+    subgraph TargetClusters ["3. OpenShift Clusters"]
+        direction TB
+        Dev["<b>OCP DEV</b><br/>dev-bwce"]
+        Staging["<b>OCP STAGING</b><br/>staging-bwce"]
+        Prod["<b>OCP PROD</b><br/>prod-bwce"]
     end
 
-    Envs --> Jenkins
-    Envs --> ArgoCD
-    HelmVal --> ArgoCD
-    Apps --> Datadog
+    Envs -->|"Config"| Jenkins
+    Envs -->|"Profiles"| ArgoCD
+    HelmVal -->|"Values"| ArgoCD
+    Apps -->|"DD Tags"| Datadog
 
-    ArgoCD -->|Syncs DEV.substvar| Dev
-    ArgoCD -->|Syncs STAGING.substvar| Staging
-    ArgoCD -->|Syncs PROD.substvar| Prod
+    ArgoCD -->|"DEV Profile"| Dev
+    ArgoCD -->|"STG Profile"| Staging
+    ArgoCD -->|"PROD Profile"| Prod
 ```
 
 </details>
