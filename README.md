@@ -10,6 +10,41 @@ Centralized Single Source of Truth (SSOT) repository storing environment configu
 
 ---
 
+## 🏛️ SSOT Configuration Hierarchy
+
+```mermaid
+flowchart TD
+    subgraph GlobalConfigs ["1. Global Configuration Repository"]
+        Envs["environments/<br/>• dev.yaml<br/>• staging.yaml<br/>• prod.yaml"]
+        Clusters["clusters/<br/>• ocp-dev-cluster.yaml<br/>• ocp-staging-cluster.yaml<br/>• ocp-prod-cluster.yaml"]
+        Apps["apps/<br/>• tibco-bwce-order-service.yaml<br/>• tibco-bwce-customer-api.yaml"]
+        HelmVal["helm-values/<br/>• values-dev.yaml<br/>• values-staging.yaml<br/>• values-prod.yaml"]
+    end
+
+    subgraph GitOpsControllers ["2. GitOps & Observability Consumers"]
+        Jenkins["🚀 Jenkins Controller<br/>(Git Parameter Dropdown)"]
+        ArgoCD["🐙 ArgoCD 3.5<br/>(Sync Waves Engine)"]
+        Datadog["🐶 Datadog Agent<br/>(Unified Service Tagging)"]
+    end
+
+    subgraph TargetClusters ["3. Target OpenShift Clusters"]
+        Dev["☸️ OCP DEV (nubenetes-dev-bwce)"]
+        Staging["☸️ OCP STAGING (nubenetes-staging-bwce)"]
+        Prod["☸️ OCP PROD (nubenetes-prod-bwce)"]
+    end
+
+    Envs --> Jenkins
+    Envs --> ArgoCD
+    HelmVal --> ArgoCD
+    Apps --> Datadog
+
+    ArgoCD -->|Syncs DEV.substvar| Dev
+    ArgoCD -->|Syncs STAGING.substvar| Staging
+    ArgoCD -->|Syncs PROD.substvar| Prod
+```
+
+---
+
 ## 🏗️ Repository Structure
 
 ```
