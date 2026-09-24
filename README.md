@@ -118,6 +118,40 @@ flowchart TB
 
 ---
 
+## 📽️ Video Walkthroughs & Architecture References (YouTube)
+
+Architectural deep dives, video walkthroughs, and technical shorts for centralized TIBCO BWCE configuration, profile externalization, and CFS bandwidth tuning are hosted on the **[Nubenetes YouTube Channel (@nubenetes)](https://www.youtube.com/@nubenetes)**.
+
+<details open>
+<summary>📂 <strong>Full-Length Technical Deep Dives & Explanations</strong></summary>
+
+<br/>
+
+##### Modernize TIBCO BWCE on OpenShift 4: Cloud-Native GitOps, Datadog APM & Argo Rollouts
+- 🔗 **Link**: [https://www.youtube.com/watch?v=XZX2pD3XqQM](https://www.youtube.com/watch?v=XZX2pD3XqQM)
+- 🌐 **Language**: English (Original Audio)
+- ⏱️ **Duration**: 8:12
+- 🏷️ **Domain**: TIBCO BWCE Modernization, Profile Externalization & CFS Throttling Fix
+- 📝 **Full Description**:
+> 🚀 Architectural blueprint for modernizing legacy TIBCO BusinessWorks Container Edition (BWCE) microservices on Red Hat OpenShift 4.20+. Explains 12-factor configuration externalization via `.substvar`, eliminating pod CPU limits to prevent Linux CFS quota bandwidth throttling on 64-thread engines, OpenMetrics scraping on port 8090, and automated canary rollouts with Argo Rollouts and Datadog APM.
+
+</details>
+
+<details open>
+<summary>📂 <strong>Architecture Video Shorts & Guides</strong></summary>
+
+<br/>
+
+##### How CFS Throttling Freezes TIBCO BWCE
+- 🔗 **Link**: [https://www.youtube.com/shorts/XyKAGxQScVo](https://www.youtube.com/shorts/XyKAGxQScVo)
+- ⏱️ **Duration**: 1:13
+- 📝 **Full Description**:
+> 🚀 Explains the Linux CFS Quota throttling trap on multi-threaded (64 threads) TIBCO BWCE containers: why pod-level CPU limits cause kernel freezes and latency spikes despite idle node CPU, and why capacity must be managed at the namespace level.
+
+</details>
+
+---
+
 ## 🔗 Related Repositories
 - **Orchestration Platform**: [jenkins-git-parameter-bwce](https://github.com/nubenetes/jenkins-git-parameter-bwce)
 - **Base Generic Global Variables SSOT**: [nubenetes/jenkins-git-parameter-global-vars](https://github.com/nubenetes/jenkins-git-parameter-global-vars)
