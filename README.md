@@ -32,6 +32,67 @@ Centralized Single Source of Truth (SSOT) repository storing environment configu
 
 ---
 
+<a id="quick-navigation-map"></a>
+## 🗺️ Quick Navigation Map
+
+This repository houses the centralized Configuration Single Source of Truth (SSOT), decoupled from the pipeline orchestration engine. Use this blueprint to navigate configurations, cluster topologies, and multimedia resources:
+
+### 🧭 Repository Architecture Blueprint
+```text
+jenkins-git-parameter-bwce-global-vars/  # 🌐 Centralized Configuration SSOT
+├── 📁 environments/                     # Environment definitions (dev.yaml, staging.yaml, prod.yaml)
+│   ├── 📄 dev.yaml                      # OCP DEV: Debug logs, DEV.substvar profile, 16 threads
+│   ├── 📄 staging.yaml                  # OCP STAGING: Info logs, STAGING.substvar profile, 32 threads
+│   └── 📄 prod.yaml                     # OCP PROD: Warn logs, PROD.substvar profile, 64 threads
+├── 📁 clusters/                         # OpenShift cluster topology definitions
+│   ├── 📄 ocp-dev-cluster.yaml          # Primary dev cluster specification
+│   ├── 📄 ocp-staging-cluster.yaml      # Staging UAT cluster specification
+│   └── 📄 ocp-prod-cluster.yaml         # Production cluster specification
+├── 📁 apps/                             # Application catalog & BWCE configurations
+│   ├── 📄 applications-inventory.yaml   # Service inventory for Backstage IDP / Jenkins
+│   ├── 📄 tibco-bwce-order-service.yaml # Order service spec & Datadog tags
+│   └── 📄 tibco-bwce-customer-api.yaml  # Customer API gateway spec
+├── 📁 helm-values/                      # OpenShift Helm values per service & environment
+│   ├── 📁 tibco-bwce-order-service/     # Values with Datadog annotations & BW_PROFILE
+│   └── 📁 tibco-bwce-customer-api/
+├── 📁 secrets-templates/                # Zero-trust templates (DB, JMS, Datadog)
+└── 📁 secrets/                          # External Secrets Operator (ESO) Vault sync
+
+jenkins-git-parameter-bwce/              # 🚀 CI/CD & GitOps Orchestration Platform
+├── 📁 jcasc/                            # Jenkins Configuration as Code (JCasC 2.492.2 LTS)
+├── 📁 jobdsl/                           # Programmatic pipeline definitions (Job DSL API)
+├── 📁 argocd-apps/                      # ArgoCD Application & ApplicationSet manifests
+└── 📁 helm/                             # Helm charts for Jenkins, Vault, and BWCE apps
+```
+
+<a id="ai-multimedia-series"></a>
+## 🎬 AI-Generated Multimedia Series (YouTube)
+
+This repository is accompanied by an educational video masterclass and technical shorts synthesized with **Gemini NotebookLM** based directly on the architectural patterns, multi-cluster GitOps configurations, and enterprise security controls from this project. All videos are freely accessible on YouTube on the [**@nubenetes**](https://youtube.com/@nubenetes) channel.
+
+> [!NOTE]
+> **Multilingual Learning Experience**:  
+> Content features native spoken audio in **English 🇺🇸**, with automated YouTube closed captions (CC) translated into **Spanish 🇪🇸 and 20+ languages** for global engineering teams.
+
+### 📽️ Full-Length Technical Deep Dives (Architecture Masterclasses)
+
+| # | Video Guide Title | Engineering Domain & Core Architecture | Duration | Direct Link |
+|:---:|:---|:---|:---:|:---:|
+| **01** | [TIBCO BWCE Modernization with jenkins git parameter](https://www.youtube.com/watch?v=PaS5pkjBIXU) | **Cloud-Native Modernization & CFS Quota Fix**<br/>12-Factor .substvar profile externalization, removing CPU limits & Datadog APM | `9:57` | [▶️ Watch](https://www.youtube.com/watch?v=PaS5pkjBIXU) |
+| **02** | [DevSecOps Fortress Blueprint](https://www.youtube.com/watch?v=ofQfc-NgoUQ) | **Zero-Trust DevSecOps & Supply Chain Security**<br/>SLSA Level 3, Cosign image signing, CycloneDX SBOM & HashiCorp Vault secrets | `7:42` | [▶️ Watch](https://www.youtube.com/watch?v=ofQfc-NgoUQ) |
+| **03** | [Multi Repo CI CD Puzzle](https://www.youtube.com/watch?v=kH7Hweim5oY) | **Multi-Repo Decoupling & ArgoCD GitOps**<br/>Solving the SCM render paradox, separating CI code from global-vars config SSOT | `7:32` | [▶️ Watch](https://www.youtube.com/watch?v=kH7Hweim5oY) |
+
+### ⚡ Video Shorts Matrix
+
+| # | Short Title | Architectural Domain & Focus | Duration | Action |
+|:---:|:---|:---|:---:|:---:|
+| **01** | [How Canary Deployments Auto Rollback](https://www.youtube.com/shorts/GUmnvmFmXxk) | **Progressive Delivery & SLA Tripwires**<br/>Argo Rollouts 20/80 traffic split with Datadog real-time 5xx/latency rollbacks | `1:28` | [▶️ Watch](https://www.youtube.com/shorts/GUmnvmFmXxk) |
+| **02** | [Why CPU Limits Freeze TIBCO BWCE](https://www.youtube.com/shorts/MNl8eUYzkDQ) | **Linux CFS Kernel Quota Throttling**<br/>Eliminating pod CPU limits on 64-thread JVMs & managing quota via ResourceQuotas | `1:32` | [▶️ Watch](https://www.youtube.com/shorts/MNl8eUYzkDQ) |
+
+*For complete technical summaries, topic breakdowns, and direct studio links, see [Section: Video Walkthroughs & Architecture References](#video-walkthroughs--architecture-references-youtube).*
+
+---
+
 ## 🏛️ SSOT Configuration Hierarchy
 
 <details>
@@ -120,33 +181,73 @@ flowchart TB
 
 ## 📽️ Video Walkthroughs & Architecture References (YouTube)
 
-Architectural deep dives, video walkthroughs, and technical shorts for centralized TIBCO BWCE configuration, profile externalization, and CFS bandwidth tuning are hosted on the **[Nubenetes YouTube Channel (@nubenetes)](https://www.youtube.com/@nubenetes)**.
+Architectural deep dives, video walkthroughs, and technical shorts for centralized TIBCO BWCE configuration, profile externalization, and multi-cluster GitOps delivery on OpenShift 4.20+ are hosted on the **[Nubenetes YouTube Channel (@nubenetes)](https://www.youtube.com/@nubenetes)**.
 
 <details open>
-<summary>📂 <strong>Full-Length Technical Deep Dives & Explanations</strong></summary>
+<summary>📂 <strong>Full-Length Technical Deep Dives (Architecture Masterclasses)</strong></summary>
 
 <br/>
 
-##### Modernize TIBCO BWCE on OpenShift 4: Cloud-Native GitOps, Datadog APM & Argo Rollouts
-- 🔗 **Link**: [https://www.youtube.com/watch?v=XZX2pD3XqQM](https://www.youtube.com/watch?v=XZX2pD3XqQM)
-- 🌐 **Language**: English (Original Audio)
-- ⏱️ **Duration**: 8:12
-- 🏷️ **Domain**: TIBCO BWCE Modernization, Profile Externalization & CFS Throttling Fix
-- 📝 **Full Description**:
-> 🚀 Architectural blueprint for modernizing legacy TIBCO BusinessWorks Container Edition (BWCE) microservices on Red Hat OpenShift 4.20+. Explains 12-factor configuration externalization via `.substvar`, eliminating pod CPU limits to prevent Linux CFS quota bandwidth throttling on 64-thread engines, OpenMetrics scraping on port 8090, and automated canary rollouts with Argo Rollouts and Datadog APM.
+##### 1. TIBCO BWCE Modernization with jenkins git parameter
+- 🔗 **Direct Link**: [https://www.youtube.com/watch?v=PaS5pkjBIXU](https://www.youtube.com/watch?v=PaS5pkjBIXU)
+- 🌐 **Origin Language**: English (Subtitles in 20+ languages)
+- ⏱️ **Duration**: 9:57
+- 🏷️ **Engineering Domain**: Cloud-Native Modernization, 12-Factor Profile Externalization & Linux CFS Quota Fix
+- 📝 **Technical Overview**:
+Architectural blueprint for modernizing legacy TIBCO BusinessWorks Container Edition (BWCE 2.9.2 / 2.10.0) microservices on Red Hat OpenShift 4.20+. Explains 12-factor configuration externalization via `.substvar`, eliminating pod CPU limits to prevent Linux CFS quota bandwidth throttling on 64-thread engines, OpenMetrics scraping on port 8090, and automated canary rollouts with Argo Rollouts and Datadog APM.
+- 🛠️ **Direct Links**: [Watch on YouTube](https://www.youtube.com/watch?v=PaS5pkjBIXU) | [Edit in YouTube Studio](https://studio.youtube.com/video/PaS5pkjBIXU/edit)
+
+##### 2. DevSecOps Fortress Blueprint
+- 🔗 **Direct Link**: [https://www.youtube.com/watch?v=ofQfc-NgoUQ](https://www.youtube.com/watch?v=ofQfc-NgoUQ)
+- 🌐 **Origin Language**: English (Subtitles in 20+ languages)
+- ⏱️ **Duration**: 7:42
+- 🏷️ **Engineering Domain**: Zero-Trust DevSecOps, Supply Chain Security & Vault Secrets
+- 📝 **Technical Overview**:
+Zero-trust security architecture for enterprise TIBCO BWCE microservices on OpenShift. Covers SLSA Level 3 supply chain provenance, cryptographic image signing with Sigstore Cosign, automated vulnerability scanning with Aqua Trivy, CycloneDX 1.5 SBOM generation, dynamic secret injection with HashiCorp Vault and External Secrets Operator (ESO), and running under OpenShift restricted-v2 SecurityContextConstraints.
+- 🛠️ **Direct Links**: [Watch on YouTube](https://www.youtube.com/watch?v=ofQfc-NgoUQ) | [Edit in YouTube Studio](https://studio.youtube.com/video/ofQfc-NgoUQ/edit)
+
+##### 3. Multi Repo CI CD Puzzle
+- 🔗 **Direct Link**: [https://www.youtube.com/watch?v=kH7Hweim5oY](https://www.youtube.com/watch?v=kH7Hweim5oY)
+- 🌐 **Origin Language**: English (Subtitles in 20+ languages)
+- ⏱️ **Duration**: 7:32
+- 🏷️ **Engineering Domain**: Multi-Repository Decoupling & ArgoCD Multi-Cluster GitOps
+- 📝 **Technical Overview**:
+Deconstructs the multi-repository decoupling challenge when separating application source code (jenkins-git-parameter-bwce) from global configuration topologies (jenkins-git-parameter-bwce-global-vars). Solves the SCM pre-execution render paradox inherent to Jenkins git-parameter dropdowns and demonstrates the shift to declarative, pull-based GitOps with ArgoCD 3.5 across multi-cluster OpenShift topologies.
+- 🛠️ **Direct Links**: [Watch on YouTube](https://www.youtube.com/watch?v=kH7Hweim5oY) | [Edit in YouTube Studio](https://studio.youtube.com/video/kH7Hweim5oY/edit)
 
 </details>
 
 <details open>
-<summary>📂 <strong>Architecture Video Shorts & Guides</strong></summary>
+<summary>📂 <strong>Technical Shorts Matrix & Architecture Breakdowns</strong></summary>
 
 <br/>
 
-##### How CFS Throttling Freezes TIBCO BWCE
-- 🔗 **Link**: [https://www.youtube.com/shorts/XyKAGxQScVo](https://www.youtube.com/shorts/XyKAGxQScVo)
-- ⏱️ **Duration**: 1:13
-- 📝 **Full Description**:
-> 🚀 Explains the Linux CFS Quota throttling trap on multi-threaded (64 threads) TIBCO BWCE containers: why pod-level CPU limits cause kernel freezes and latency spikes despite idle node CPU, and why capacity must be managed at the namespace level.
+### ⚡ Video Shorts Matrix
+
+| # | Short Title | Architectural Domain & Focus | Duration | Action |
+|:---:|:---|:---|:---:|:---:|
+| **01** | [How Canary Deployments Auto Rollback](https://www.youtube.com/shorts/GUmnvmFmXxk) | **Progressive Delivery & SLA Tripwires**<br/>Argo Rollouts 20/80 traffic split with Datadog real-time 5xx/latency rollbacks | `1:28` | [▶️ Watch](https://www.youtube.com/shorts/GUmnvmFmXxk) |
+| **02** | [Why CPU Limits Freeze TIBCO BWCE](https://www.youtube.com/shorts/MNl8eUYzkDQ) | **Linux CFS Kernel Quota Throttling**<br/>Eliminating pod CPU limits on 64-thread JVMs & managing quota via ResourceQuotas | `1:32` | [▶️ Watch](https://www.youtube.com/shorts/MNl8eUYzkDQ) |
+
+<br/>
+
+##### 1. How Canary Deployments Auto Rollback
+- 🔗 **Direct Link**: [https://www.youtube.com/shorts/GUmnvmFmXxk](https://www.youtube.com/shorts/GUmnvmFmXxk)
+- 🌐 **Origin Language**: English (Subtitles in 20+ languages)
+- ⏱️ **Duration**: 1:28
+- 🏷️ **Engineering Domain**: Progressive Delivery, Argo Rollouts & Datadog SLA Analysis
+- 📝 **Technical Overview**:
+Demonstrates how progressive canary delivery protects mission-critical enterprise integration services. Details traffic splitting with Argo Rollouts (routing 20% traffic to canary and 80% to stable) and continuous Datadog APM SLA evaluation (5xx error rate under 0.1%, P99 latency under 250ms), triggering instant automated rollbacks when thresholds are breached.
+- 🛠️ **Direct Links**: [Watch Short](https://www.youtube.com/shorts/GUmnvmFmXxk) | [Edit in YouTube Studio](https://studio.youtube.com/video/GUmnvmFmXxk/edit)
+
+##### 2. Why CPU Limits Freeze TIBCO BWCE
+- 🔗 **Direct Link**: [https://www.youtube.com/shorts/MNl8eUYzkDQ](https://www.youtube.com/shorts/MNl8eUYzkDQ)
+- 🌐 **Origin Language**: English (Subtitles in 20+ languages)
+- ⏱️ **Duration**: 1:32
+- 🏷️ **Engineering Domain**: Linux Kernel cgroups, CFS Quota Bandwidth Throttling & JVM Sizing
+- 📝 **Technical Overview**:
+Unpacks the counterintuitive Linux Completely Fair Scheduler (CFS) bandwidth throttling trap on containerized multi-threaded JVMs like TIBCO BWCE. Explains why setting pod-level CPU limits divides CPU time into discrete 100ms budgetary windows that 64 engine threads exhaust immediately, causing kernel freezes despite idle node CPU. Demonstrates the production fix: removing container CPU limits and managing capacity at the namespace boundary via OpenShift ResourceQuotas.
+- 🛠️ **Direct Links**: [Watch Short](https://www.youtube.com/shorts/MNl8eUYzkDQ) | [Edit in YouTube Studio](https://studio.youtube.com/video/MNl8eUYzkDQ/edit)
 
 </details>
 
